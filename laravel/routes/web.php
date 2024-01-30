@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/laravel', function () {
-   return view('home');
+    return view('home');
+
+    // $user= new User();
+    // $allUser= $user::all();
+    // dd($allUser);
 });
 Route::get('/product', function () {
    return view('product');
 });
+
+
+
+
+
+
+
+
+
+
+

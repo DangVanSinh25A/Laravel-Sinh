@@ -26,14 +26,3 @@ Route::get('/laravel', function () {
 Route::get('/product', function () {
    return view('product');
 });
-
-
-
-
-
-
-
-
-
-
-

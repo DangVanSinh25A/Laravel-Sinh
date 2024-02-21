@@ -1,16 +1,18 @@
-<h1 style="text-align: center;">Học lập trình laravel tại Unicode</h1>
+<h1>Welcome to Learning_Laravel at My Website</h1>
+<a href="<?php echo route('admin.show-form') ?>">Show form</a>
+<a href="<?php echo route('admin.products.add') ?>">Thêm sản phẩm</a>
+<a href="<?php echo route('admin.laravel', ['id'=>1, 'slug'=>'tin-tuc-the-gioi']) ?>">tin tức</a>
 <?php
-    if (env('APP_ENV')=='production'){
-        //Call Api Live 
-        echo 'Call api Live';
-    }
-    else{
-        //Call Api Sandbox 
-        echo 'Call api Sandbox';
-    }
+// Output the value of APP_ENV using env() function
+echo env('APP_ENV');
 
-    // echo date('Y-m-d H:i:s');
-    // echo env('APP_ENV');
-    // echo config('app.env');
+// Output the value of APP_ENV using config() function
+echo config('app.env');
 
+// Check if the environment is production
+if (env('APP_ENV') == 'production') {
+    echo 'call api live';
+} else {
+    echo 'call api sandbox';
+}
 ?>

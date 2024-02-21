@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,25 +27,40 @@ Route::get('/laravel', function () {
 Route::get('/product', function () {
    return view('product');
 });
-Route::prefix('admin')->group(function(){
-    Route::get('unicode', function(){
-        return 'Phương thức Get của path/unicode';
+// Cách cũ 
+Route::get('/','App\Http\Controllers\HomeController@index' )->name('home');
+
+Route::get('/news','HomeController@getNews' )->name('news');
+
+// Cách mới:
+Route::get('/category/{id}', [HomeController::class, 'getCategory']) ;
+
+Route::prefix('admin')->group(function () {
+  
+  Route::get('/laravel/{id?}/{slug?}.html', function ($id=null,$slug=null) {
+    $content = "Phương thức get của path laravel với  tham số : ";
+    $content.='id = '.$id.'<br/>';
+    $content.='slug = '.$slug.'<br/>';
+
+    return $content;
+  })->where('id','\d')->where('slug','.+')->name('admin.laravel');
+
+
+  Route::get('/show-form', function () {
+    return view('form');
+  })->name('admin.show-form');
+
+  Route::prefix('/products')->middleware('checkpermission')->group(function () {
+    Route::get('/', function () {
+      return 'Danh sách sản phẩm';
     });
-    Route::get('show-form', function(){
-        return view('form');
+
+     Route::get('/add', function () {
+      return 'Thêm sản phẩm';
+    })->name('admin.products.add');
+
+     Route::get('/edit', function () {
+      return 'Sửa sản phẩm';
     });
-    Route::prefix('products')->group(function(){
-        Route::get('/', function(){
-            return 'Danh sách sản phẩm';
-        });
-        Route::get('add', function(){
-            return 'Thêm sản phẩm';
-        });
-        Route::get('edit', function(){
-            return 'Sửa sản phẩm';
-        });
-        Route::get('delete', function(){
-            return "Xóa sản phẩm";
-        });
-    });
+  });
 });

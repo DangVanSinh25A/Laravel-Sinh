@@ -26,3 +26,25 @@ Route::get('/laravel', function () {
 Route::get('/product', function () {
    return view('product');
 });
+Route::prefix('admin')->group(function(){
+    Route::get('unicode', function(){
+        return 'Phương thức Get của path/unicode';
+    });
+    Route::get('show-form', function(){
+        return view('form');
+    });
+    Route::prefix('products')->group(function(){
+        Route::get('/', function(){
+            return 'Danh sách sản phẩm';
+        });
+        Route::get('add', function(){
+            return 'Thêm sản phẩm';
+        });
+        Route::get('edit', function(){
+            return 'Sửa sản phẩm';
+        });
+        Route::get('delete', function(){
+            return "Xóa sản phẩm";
+        });
+    });
+});

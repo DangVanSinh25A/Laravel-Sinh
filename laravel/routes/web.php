@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\ProductsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -63,4 +65,29 @@ Route::prefix('admin')->group(function () {
       return 'Sửa sản phẩm';
     });
   });
+});
+
+// Cleint router :: 
+Route::prefix('category')->group(function() {
+  // danh sách chuyên mục
+    Route::get('/',[CategoriesController::class, 'index'])->name('categories.list');
+
+  Route::get('/edit/{id}', [CategoriesController::class,'getCategory'])->name('categories.edit');
+
+  Route::post('/edit/{id}', [CategoriesController::class, 'updateCategory'])->name('categories');
+
+  //Hiển thị form add dữ liệu 
+  Route::get('/add', [CategoriesController::class, 'addCategory'])->name('categories.add');
+
+  Route::post('/add', [CategoriesController::class, 'handleAddcategory']);
+
+  // Xóa chuyên mục
+  Route::delete('/delete/{id}', [CategoriesController::class, 'deleteCategory']);
+
+});
+
+Route::prefix('admin')->group(function(){
+ 
+    Route::resource('products', ProductsController::class);
+ 
 });

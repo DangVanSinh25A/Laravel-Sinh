@@ -7,18 +7,25 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+    public function _construct(){
+        //echo 'Product khởi động';
+        //Sử dụng session để check login
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-    return "Danh sách sản phẩm";
+        //
+        return 'Danh sách sản phẩm';
     }
 
     /**
      * Show the form for creating a new resource.
-     Hiển thị form thêm sản phẩm
      */
+    /*
+    Hiển thị form thêm sản phẩm(Phương thức GET)
+    */
     public function create()
     {
         //
@@ -26,8 +33,10 @@ class ProductsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     Xử lý thêm sản phẩm --> POST
      */
+    /*
+    Xử lí thêm sản phẩm(Phương thức POST)
+    */
     public function store(Request $request)
     {
         //
@@ -35,8 +44,8 @@ class ProductsController extends Controller
 
     /**
      * Display the specified resource.
-    Lấy ra thông tin của 1 sản phảm 
      */
+    //Lấy ra thông tin của 1 sản phẩm(Phương thức GET)
     public function show(string $id)
     {
         //
@@ -44,8 +53,8 @@ class ProductsController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-    Hiển thị form
      */
+    //Hiển thị form sửa sản phẩm (Phương thức GET)
     public function edit(string $id)
     {
         //
@@ -54,6 +63,7 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    //Xử lí sửa sản  phẩm(PUT,PATCH)
     public function update(Request $request, string $id)
     {
         //
@@ -62,6 +72,7 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    //Xử lí xóa sản phẩm
     public function destroy(string $id)
     {
         //

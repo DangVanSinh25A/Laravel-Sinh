@@ -5,6 +5,7 @@ use App\Models\User;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,4 +91,9 @@ Route::prefix('admin')->group(function(){
  
     Route::resource('products', ProductsController::class);
  
+});
+//Admin route
+Route::middleware('auth.admin')->prefix('admin')->group(function(){
+  Route::get('/',[DashboardController::class,'index']);
+  Route::resource('products',ProductsController::class)->middleware('auth.admin.product');
 });

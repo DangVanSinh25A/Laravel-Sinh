@@ -92,8 +92,16 @@ Route::prefix('admin')->group(function(){
     Route::resource('products', ProductsController::class);
  
 });
+// //Admin route
+// Route::middleware('auth.admin')->prefix('admin')->group(function(){
+//   Route::get('/',[DashboardController::class,'index']);
+//   Route::resource('products',ProductsController::class)->middleware('auth.admin.product');
+// });
+
+Route::get('san-pham/{id}',[HomeController::class, 'getProductDetail']);
+
 //Admin route
 Route::middleware('auth.admin')->prefix('admin')->group(function(){
-  Route::get('/',[DashboardController::class,'index']);
-  Route::resource('products',ProductsController::class)->middleware('auth.admin.product');
+    Route::get('/',[DashboardController::class,'index']);
+    Route::resource('products',ProductsController::class)->middleware('auth.admin.product');
 });

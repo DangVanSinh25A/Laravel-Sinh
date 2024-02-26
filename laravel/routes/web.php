@@ -68,6 +68,7 @@ Route::prefix('admin')->group(function () {
   });
 });
 
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('auth.admin');
 // Cleint router :: 
 Route::prefix('category')->group(function() {
   // danh sách chuyên mục
@@ -92,6 +93,7 @@ Route::prefix('admin')->group(function(){
     Route::resource('products', ProductsController::class);
  
 });
+Route::get('san-pham/{id}', [HomeController::class, 'getProductDetail']);
 // //Admin route
 // Route::middleware('auth.admin')->prefix('admin')->group(function(){
 //   Route::get('/',[DashboardController::class,'index']);

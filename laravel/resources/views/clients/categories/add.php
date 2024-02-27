@@ -1,9 +1,11 @@
-<h1>Thêm category trong dự án </h1>
-<form action="<?php echo route('categories.add') ?>" method="post">
-<div>
-    <input type="text" name="category_name" placeholder="Thêm category">
-</div>
-<?php echo csrf_field() ?>
-<!--<input type="hidden" name="_token" value="<?php echo csrf_token()  ?>">-->
-<button type="submit">Thêm category</button>
+<h1>them moi chuyen muc</h1>
+<form action="<?php  echo route('categories.add'); ?>" method="POST">
+
+    <div>
+    <input type="text" nme="category_name" placeholder="Ten chuyen muc
+    value="<?php echo $old('category_name'); ?>">
+    </div>
+    <button type="submit"> Them chuyen muc</button>
+    <?php echo csrf_field(); ?>
+    <!-- <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" > -->
 </form>

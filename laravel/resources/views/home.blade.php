@@ -1,25 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unicode - Học lập trình web bài bản</title>
-</head>
-<body>
-    <header>
-        <h1>
-            HEADER - UNICODE
-        </h1>
-        <h2>{{$title}}</h2>
-    </header>
-    <main>
-        <h1>NỘI DUNG - UNICODE</h1>
-        <h2><?php echo $content; ?></h2>
-    </main>
-    <header>
-        <h1>
-            FOOTER - UNICODE
-        </h1>
-    </header>
-</body>
-</html>
+<h1>Trang chủ Unicode </h1>
+<h2>{{$welcome}}</h2>
+<h2>{{!empty(request()->keyword)?request()->keyword:"khoong có gì"}}</h2>
+
+<div class="container">
+    {!!$content!!};
+</div>
+<!-- @for($i =1; $i<=10; $i++)
+<p>Phần tử thứ {{$i}}</p>
+@endfor -->
+<!-- @while($index<=10)
+<p>Phần tử thứ {{$index}}</p>
+@php $index++;;
+ @endphp
+@endwhile -->
+<!-- @foreach($dataArr as $key =>$item)
+<p>Phần tử: {{$item}} -{{$key}}</p>
+@endforeach; -->
+<!-- @forelse($dataArr as $item)
+<p>Phần tư: {{$item}}</p>
+@empty
+<p>Không có phần tử này</p>
+@endforelse; -->
+
+<!-- @if($number>10)
+<p>Đây là giá trị hợp lê</p>
+@endif -->
+ <!-- @if($number<0)
+<p>Số âm</p>
+@elseif($number>=0  && $number<5)
+<p>đây là giá trị bằng 5</p>
+@else
+<p>Đây là giá trị nhỏ hơn 10</p>
+@endif;  -->
+
+@switch($number)
+@case(1)
+<p>Số thứ nhất</p>
+@break
+@case(2)
+<p>Số còn lại</p>
+@break
+@default
+<p>Số còn lại</p>
+@endswitch

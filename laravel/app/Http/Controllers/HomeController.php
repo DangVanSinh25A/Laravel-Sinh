@@ -3,39 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class HomeController extends Controller
 {
-    //action index
-    public function index()
-    {
-        $title = " Học lập trình web tại Unicode";
-        $content = "Học lập trình Laravel 8.x tại Unicode";
-        
-        //compact('title','content')
-        return view('home')->with(['title'=> $title, 'content'=>$content]); //load view home.php
+    //
+    public $data =[];
+    public function index(){
+        $this->data['welcome']= 'unicode';
+        $this->data['content'] = '<h3>Chương trình học </h3>';
 
-        //return View::make('home')->with(['title'=> $title, 'content'=>$content]);
-
-        // $contentView = view('home')->render();
-        // //$contentView = $contentView->render();
-        // dd($contentView);
-        //return $contentView;
+        $this->data['index']=1;
+        $this->data['dataArr'] = [];
+        $this->data['check'] = true;
+        $this->data['number'] =10;
+        return view('home',$this->data);
     }
-
-    //action getNews
-    public function getNews()
-    {
-        return 'Danh sách tin tức';
-    }
-
-    public function getCategories($id)
-    {
-        return 'Chuyên mục' . $id;
-    }
-
-    public function getProductDetail($id){
-        return view('clients.products.detail',compact('id'));
-    }
+    
 }

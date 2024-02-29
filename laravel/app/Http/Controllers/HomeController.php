@@ -2,41 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Routing\Controller as BaseController;
 
-use Illuminate\Support\Facades\View;
-
-class HomeController extends Controller
+class HomeConTroller extends Controller
 {
-    //action index
+    // 
     public $data = [];
-    public function index(){
-        $this->data['welcome'] = 'Learn coding <b>UNICODE</b> ';
-        $this->data['content'] = '<h3>Topic 1: The World in your eyes </h3>
-        <p>Topic 1</p>
-        <p>Topic 2</p>
-        <p>Topic 3</p>';
+    public function index()
+    {
+        $this->data['welcome'] = 'Học Lập Trình Laravel';
+        $this->data['content'] = '<h3>Chương 1: Nhập môn laravel</h3>
+        <p>Kiến thức 1</p>
+        <p>Kiến thức 2</p>
+        <p>Kiến thức 3</p>
+        ';
 
         $this->data['index'] = 1;
-
         $this->data['dataArr'] = [
-            // 'Group 1',
-            // 'Group 2',
-            // 'Group 3'
+            'item1',
+            'item2',
+            'item3',
         ];
 
-        $this->data['number'] = 1;
-
-       return view('home', $this->data);
+        $this->data['number'] = 9;
+        $this->data['message'] = 'Đặt hàng thành công';
+        $this->data['title'] = 'Trang chủ';
+        return view('client.home', $this->data);
     }
 
-    public function getNews(){
-        return 'Danh sach tin tuc';
-    }
-    public function getCategory($id){
-        return 'Chuyen muc: '.$id;
-    }
-    public function getProductDetail($id){
-        return view('clients.products.detail', compact('id'));
+    public function products()
+    {
+        $this->data['title'] = 'sản phẩm';
+        return view('clients.products', $this->data);
     }
 }

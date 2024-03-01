@@ -166,3 +166,6 @@ Route::middleware('auth.admin')->prefix('admin')->group(function () {
 });
 
 Route::get('/san-pham', [HomeController::class, 'products']);
+Route::get('/themsanpham', [HomeController::class, 'getAdd']);
+Route::post('/them-san-pham', [HomeController::class, 'postAdd']);
+// Route::put('/themsanpham', [HomeController::class, 'putAdd']);

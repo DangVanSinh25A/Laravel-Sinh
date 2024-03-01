@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unicode</title>
-</head>
-
-<body>
-    <header>
-        <h1>Unicode</h1>
-    </header>
-    <main>
-        <h1>Nội dung Unicode</h1>
-        <h2><?php echo $content ?></h2>
-        <h1>Trang chủ unicode</h1>
-        <!-- Cbhuyển tất cả mã html sang dạng thực thể: giúp an toàn hơn -->
-        <h2>{{$welcome}}</h2>
-        <!-- Toán tử ba ngôi và cần biên dịch html -->
-        <!-- <h2>{{!empty(request() -> keyword)?request()->keyword:'Không có gì'}}</h2>
+<!-- Cbhuyển tất cả mã html sang dạng thực thể: giúp an toàn hơn -->
+<h2>{{$welcome}}</h2>
+<!-- Toán tử ba ngôi và cần biên dịch html -->
+{{-- <h2>{{!empty(request() -> keyword)?request()->keyword:'Không có gì'}}</h2>
 <div class="container">
     {!!$content!!}
 </div>
@@ -28,11 +11,11 @@
 
     @while($index <= 10) <p>Phần thử thứ: {{$index}}</p>
         @php
-            $index++;
+        $index++;
         @endphp
-    @endwhile -->
+        @endwhile --}}
 
-        @foreach ($dataArr as $key =>$item)
+        {{-- @foreach ($dataArr as $key =>$item)
         <p>Phần tử: {{$item}} - {{$key}}</p>
         @endforeach
 
@@ -69,13 +52,13 @@
             }else
             $total = $number +20;
             @endphp
-            <h3>kết quả {{$number}} - total: {{$total}}</h3>
+            <h3>kết quả {{$number}} - total: {{$total}}</h3> --}}
 
-            <!-- @forelse ($dataArr as $item)
+            {{-- @forelse ($dataArr as $item)
             <p>Phần tử: {{$item}}</p>
             @empty
             <p>Không có phần tử nào</p>
-            @endforelse -->
+            @endforelse --}}
             <!-- Chỉ comment html chứ lệnh vẫn chạy -->
 
 
@@ -91,46 +74,28 @@
             $message ='Đặt hàng thành công';
             @endphp--}}
             @include('parts.notice')
-    </main>
-    <footer>
-        <h1>Footer</h1>
-    </footer>
 
-    @extends('layouts.client')
-    @section('title')
-    <h1>Trang chủ</h1>
-    @endsection
+            @extends('layouts.client')
+            @section('title')
+            <h1>Trang chủ</h1>
+            @endsection
 
+            @section('css')
+            @endsection
 
-    @section('css')
-    <style>
-        header {
-            background-color: black;
-            color: #fff;
-        }
-    </style>
-    @endsection
+            @section('content')
+            <h1>Trang chủ</h1>
+            @datatime('2022-12-03 15:00:00')
+            @datatime("2022-12-06 15:00:00")
+            <button type="button" class="show">Show</button>
+            @endsection
 
-    @section('content')
-    <h1>Trang chủ</h1>
-    <button type="button" class="show">Show</button>
-    @endsection
-
-    @section('sidebar')
-    <!-- @parent -->
-    <h3>Home sidebar</h3>
-    @endsection
-    @section('content')
-    <h1>{{$title}}</h1>
-    @endsection
-
-    @section('js')
-    <script>
-        document.querySelector('.show').onclick = function() {
-            alert('Thành côn');
-        }
-    </script>
-    @endsection
-</body>
-
-</html>
+            @section('sidebar')
+            <!-- @parent -->
+            <h3 class="container-fluid">Home sidebar</h3>
+            @endsection
+            @section('bg-primary')
+            <h1>{{$title}}</h1>
+            @endsection
+            @section('js')
+            @endsection

@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class HomeConTroller extends Controller
 {
+    // 
     public $data = [];
     public function index()
     {
@@ -27,6 +28,13 @@ class HomeConTroller extends Controller
 
         $this->data['number'] = 9;
         $this->data['message'] = 'Đặt hàng thành công';
-        return view('home', $this->data);
+        $this->data['title'] = 'Trang chủ';
+        return view('client.home', $this->data);
+    }
+
+    public function products()
+    {
+        $this->data['title'] = 'sản phẩm';
+        return view('clients.products', $this->data);
     }
 }

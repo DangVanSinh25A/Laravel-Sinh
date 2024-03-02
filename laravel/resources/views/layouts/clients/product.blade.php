@@ -91,6 +91,21 @@
             $message ='Đặt hàng thành công';
             @endphp--}}
             @include('parts.notice')
+            @include('layouts.clients.blocks.header')
+            <aside>
+                @section('sidebar')
+                {{-- @include('layouts.clients.blocks.sidebar') --}}
+                @show
+            </aside>
+            <div class="content">
+                <section>
+                    <div class="container">
+                        <h1>Trang chủ</h1>
+                    </div>
+                </section>
+            </div>
+            @include('layouts.clients.blocks.footer')
+            @yield('js')
     </main>
     <footer>
         <h1>Footer</h1>
@@ -131,6 +146,11 @@
         }
     </script>
     @endsection
+    @push('scripts')
+    <script>
+        console.log('push')
+    </script>
+    @endpush
 </body>
 
 </html>

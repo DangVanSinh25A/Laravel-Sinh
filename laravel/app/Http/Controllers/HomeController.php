@@ -6,23 +6,25 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public $data = [];
+    //
+    public $data =[];
     public function index(){
-        $this->data['title'] = 'Đào tạo lập trình web';
-        return view('clients.home', $this->data);
+        $this->data['title']= 'Lập trình tại unicode';
+        $this->data['message'] = "Đăng ký tài khoản thành công";
+        return view('client.home',$this->data);
     }
     public function products(){
         $this->data['title'] = 'Sản phẩm';
-        return view('clients.products', $this->data);
+        return view('client.products',$this->data);
     }
-    public function getProducts(){
+    public function getAdd(){
         $this->data['title'] = 'Thêm sản phẩm';
-        return view('clients.add', $this->data);
+        return view('client.add',$this->data);
     }
-    public function postProducts(Request $request){
+    public function postAdd(Request $request){
         dd($request);
     }
-    public function putProducts(Request $request){
+    public function putAdd(Request $request){
         dd($request);
     }
 }

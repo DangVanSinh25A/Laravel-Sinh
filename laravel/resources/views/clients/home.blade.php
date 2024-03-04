@@ -1,27 +1,21 @@
 @extends('layouts.client')
-{{-- <h1>sinh</h1> --}}
-@section('title')
-    <p>Header</p>
-    {{$title}}
+@section('titlet')
+<h1>Trang chủ - </h1>
 @endsection
-
 @section('sidebar')
-    {{-- @parent  --}}
-    <h5>Home Sidebar</h5>
+@parent
+<h1>Home Sidebar</h1>
+
+
 @endsection
 
-@section('content')
-    <h1>Trang chủ</h1>
-    @datetime('2025-03-03 14:03:00')
-    @include('clients.contents.slide')
-    @include('clients.contents.about')
-    @datetime('2034-03-03 14:03:00')
+@section ('content')
+<h1> Trang chủ </h1>
+<x-alert type="info" :content="$message" data-icon="youtube"/>
+<!-- <x-inputs.button/>
+
+<x-forms.button /> -->
 @endsection
 
-@section('css')
-@endsection
-
-
-@section('js')
-
+@section ('css')
 @endsection

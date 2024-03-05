@@ -1,6 +1,7 @@
 @extends('layouts.client')
-@section('titlet')
-<h1>Trang chủ - </h1>
+@section('title')
+    <p>Header</p>
+    {{$title}}
 @endsection
 @section('sidebar')
 @parent
@@ -9,13 +10,15 @@
 
 @endsection
 
-@section ('content')
-<h1> Trang chủ </h1>
-<x-alert type="info" :content="$message" data-icon="youtube"/>
-<!-- <x-inputs.button/>
-
-<x-forms.button /> -->
-@endsection
-
-@section ('css')
+@section('content')
+    <h1>Trang chủ</h1>
+    @include('clients.contents.slide')
+    @include('clients.contents.about')
+    @env('Production')
+    <p>Môi trường Production</p>
+    @elseenv('test')
+    <p>Môi trường test</p>
+    @else
+    <p>Môi trường dev</p>
+    @endenv
 @endsection

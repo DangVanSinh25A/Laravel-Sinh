@@ -4,27 +4,34 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+
 class HomeController extends Controller
 {
-    //
-    public $data =[];
+    public $data = [];
     public function index(){
-        $this->data['title']= 'Lập trình tại unicode';
-        $this->data['message'] = "Đăng ký tài khoản thành công";
-        return view('client.home',$this->data);
+        $this->data['title'] = 'Đào tạo lập trình web';
+        return view('clients.home', $this->data);
     }
     public function products(){
         $this->data['title'] = 'Sản phẩm';
-        return view('client.products',$this->data);
+        return view('clients.products', $this->data);
     }
-    public function getAdd(){
+    public function getProducts(){
         $this->data['title'] = 'Thêm sản phẩm';
-        return view('client.add',$this->data);
+        return view('clients.add', $this->data);
     }
-    public function postAdd(Request $request){
+    public function postProducts(Request $request){
         dd($request);
     }
-    public function putAdd(Request $request){
+    public function putProducts(Request $request){
         dd($request);
+    }
+    public function getArr(){
+        $contentArr = [
+            'name' => 'Laravel',
+            'lesson' => 'Khóa học lập trình laravel',
+            'academy' => 'Unicode academy'
+        ];
+        return $contentArr;
     }
 }

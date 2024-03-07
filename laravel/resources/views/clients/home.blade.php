@@ -1,13 +1,7 @@
 @extends('layouts.client')
-@section('title')
-    <p>Header</p>
-    {{$title}}
-@endsection
 @section('sidebar')
-@parent
-<h1>Home Sidebar</h1>
-
-
+    {{-- @parent  --}}
+    <h5>Home Sidebar</h5>
 @endsection
 
 @section('content')
@@ -21,4 +15,22 @@
     @else
     <p>Môi trường dev</p>
     @endenv
+    {{-- <x-alert/> --}}
+    {{-- <x-alert type="danger" /> --}}
+    <x-alert type="info" :content="$title" dataIcon="youtube"/>
+    {{-- <x-package-alert/> --}}
+    {{-- <x-inputs.button/>
+    <x-forms.button/> --}}
+        <p><img src="https://cf.shopee.vn/file/e73e521bd3ec1b77277d596fee353d75_tn" alt=""></p>
+        <p><a href="{{route('dowloadImage').'?image=https://cf.shopee.vn/file/e73e521bd3ec1b77277d596fee353d75_tn'}}" class="btn btn-primary">Dowload ảnh</a></p>
+        <p><a href="{{route('dowloadImage').'?image='.public_path('storage/meo.png')}}" class="btn btn-primary">Dowload ảnh</a></p>
+        <p><a href="{{route('dowloadPDF').'?file='.public_path('storage/DuongThiHongLam-Final.pdf')}}" class="btn btn-primary">Dowload tài liệu</a></p>
+    @section('css')
+        <style>
+            img{
+                max-width: 100%;
+                height: auto;
+            }
+        </style>
+    @endsection
 @endsection

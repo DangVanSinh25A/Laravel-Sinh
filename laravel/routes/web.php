@@ -46,6 +46,10 @@ Route::post('/demo-response', function (Request $request) {
 Route::get('download-image', [HomeController::class, 'dowloadImage'])->name('dowloadImage');
 Route::get('download-doc', [HomeController::class, 'dowloadPDF'])->name('dowloadPDF');
 //Người dùng
-Route::prefix('users')->group(function(){
-    Route::get('/',[UsersController::class, 'index']);
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/', [UsersController::class, 'index'])->name('index');
+    Route::get('/add', [UsersController::class, 'add'])->name('add');
+    Route::post('/add', [UsersController::class, 'postAdd'])->name('post-add');
+    Route::get('/edit/{id}', [UsersController::class, 'getEdit'])->name('edit');
+    Route::post('/update', [UsersController::class, 'postEdit'])->name('post-edit');
 });

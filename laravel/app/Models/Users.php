@@ -5,81 +5,70 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\UsersController;
 
 class Users extends Model
 {
     use HasFactory;
-    //Khai bảo một thuộc tính table
     protected $table = 'users';
-    public function getAllUsers()
+    public function getAllUser()
     {
-        $users = DB::select('SELECT * FROM users ORDER BY created_at DESC');
+        $users = DB::select('SELECT * from users ORDER BY create_at DESC');
         return $users;
     }
     public function addUser($data)
     {
-        DB::insert('INSERT INTO users (name, email, created_at) VALUE (?, ? , ?)', $data);
+        Db::insert('INSERT INTO users (fullname,email,create_at) value (?,?,?)', $data);
     }
-    public function getDetail($id)
+    public function getDetial($id)
     {
-        return DB::select('SELECT* FROM ' . $this->table . ' WHERE id = ? ', [$id]);
+        return DB::select('SELECT * FROM ' . $this->table . ' WHERE id = ?', [$id]);
     }
     public function updateUser($data, $id)
     {
-        $data[] = $id;
-        return DB::update('UPDATE ' . $this->table . ' SET name = ?, email = ?, updated_at = ? WHERE id = ? ', $data);
+        $data = array_merge($data, [$id]);
+        return DB::update('UPDATE ' . $this->table . ' SET fullname =?,email =?, update_at= ? where id=?', $data);
     }
-
     public function deleteUser($id)
     {
-        return DB::delete("DELETE FROM $this->table WHERE id= ? ", [$id]);
+        return  DB::delete("DELETE FROM $this->table WHERE id=? ", [$id]);
     }
-    public function statementUser($sql)
+    public function learnQueryBuiler()
     {
-        return DB::statement($sql);
-    }
-    public function learnQueryBuider()
-    {
-        DB::enableQueryLog();
-        //Lấy tất cả bản ghi của table
-        // $lists = DB::table($this->table)->get(); // list này là một mảng
-        $id = 5;
+        // lấy tất cả bản ghi của table
+        $id = 20;
         // $lists = DB::table($this->table)
-        //     ->select('email', 'name as hoten', 'id', 'created_at')
-        //gom nhóm
-        // ->where('id', 2)
+        //     ->select('fullname', 'email','update_at','create_at')
+        // ->where('id',2)
         // ->where(function($query) use ($id){
-        //     $query->where('id', '<', $id)->orWhere('id', '>', $id);
+        //     $query->where('id', '<',$id)->orWhere('id','>',$id);
+        //     $query->orWhere('id','>',$id);
         // })
-        // ->where('name', 'like', '%Nguyễn Văn A%')
-        // ->whereBetween('id', [3,5])
-        // ->whereNotBetween('id', [3,5])
-        // ->whereIn('id', [4, 5])
-        // ->whereNotIn('id', [4, 5])
-        // ->whereNull('update')
-        // ->whereNotNull('updated_at')
-        // ->whereDate('updated_at', '2024-03-20')
-        // ->whereMonth('created_at', '03 ')
-        // ->whereMonth('created_at', '11')
-        // ->whereYear('created_at', '2024 ')
-        // ->whereColumn('created_at','>' ,'update_at')
-
-        // Phần join bảng
-        $lists = DB::table('users')
-            ->select('users.*', 'groups.name as group_name')
-            ->join('groups', 'users.group_id', '=', 'groups.id')
-            // ->leftJoin('groups', 'users.group_id', '=', 'groups.id')
-            // ->rightJoin('groups', 'users.group_id', '=', 'groups.id')
+        // ->where('fullname','like','%Vân Thư%')
+        //    ->whereBetween('id',[1,4])
+        // ->whereIn('id',[1,4])
+        // ->whereDate('update','2023-03-02')
+        // ->whereMonth('create_at','02')
+        // ->whereDay('create_at','18')
+        // ->whereColumn('create_at','>','update_at'
+        //     ->get();
+        //Join 2 bảng lại với nhau
+        $lists =  DB::table('users')
+            // ->select('users.*', 'groups.name as group_name')
+            // ->rightJoin('groups', 'users.group_id', '=', 'groups.id');
+            //->orderBy('create_at','desc');
+            // ->orderBy('id','desc');
+            // ->inRandomOrder();
+            // ->select(DB::raw('count(id) as email_count'), 'email')
+            // ->groupBy('email')
+            // ->having('email_count')
+            // ->limit(2)
+            // ->offset(1)
+            ->take(2)
+            ->skip(2)
             ->get();
-        // $sql = DB::getQueryLog();
-        // dd($sql);
-
-        dd($lists);
-        // echo $lists[0]->email;
-        // Lấy một bản ghi đầu tiên của table (Lấy thông tin chi tiết)
+        $sql = DB::getQueryLog();
+        dd($sql);
+        // Lấy 1 bản ghi đầu tiên của table lấy thông tin chi tiết
         $detail = DB::table($this->table)->first();
-        // dd($detail->email);
-        dd($lists);
     }
 }

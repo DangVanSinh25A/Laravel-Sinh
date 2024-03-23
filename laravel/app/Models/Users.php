@@ -5,81 +5,111 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\UsersController;
-
 class Users extends Model
 {
     use HasFactory;
-    //Khai bảo một thuộc tính table
     protected $table = 'users';
-    public function getAllUsers()
-    {
-        $users = DB::select('SELECT * FROM users ORDER BY created_at DESC');
+    public function getAllUser(){
+        $users = DB::select('SELECT * from users ORDER BY created_at DESC');
         return $users;
     }
-    public function addUser($data)
-    {
-        DB::insert('INSERT INTO users (name, email, created_at) VALUE (?, ? , ?)', $data);
-    }
-    public function getDetail($id)
-    {
-        return DB::select('SELECT* FROM ' . $this->table . ' WHERE id = ? ', [$id]);
-    }
-    public function updateUser($data, $id)
-    {
-        $data[] = $id;
-        return DB::update('UPDATE ' . $this->table . ' SET name = ?, email = ?, updated_at = ? WHERE id = ? ', $data);
-    }
 
-    public function deleteUser($id)
-    {
-        return DB::delete("DELETE FROM $this->table WHERE id= ? ", [$id]);
+    public function addUser($data){
+        Db::insert('INSERT INTO users (fullname,email,create_at) value (?,?,?)',$data);
     }
-    public function statementUser($sql)
-    {
+    public function getDetial($id){
+        return DB::select('SELECT * FROM ' . $this->table . ' WHERE id = ?', [$id]);
+    }
+    public function updateUser($data,$id){
+        $data = array_merge($data,[$id]);
+        return DB::update('UPDATE '.$this->table.' SET fullname =?,email =?, update_at= ? where id=?', $data);
+    }
+    public function deleteUser($id){
+      return  DB::delete("DELETE FROM $this->table WHERE id=? ",[$id]);
+    }
+    public function statementUser($sql){
         return DB::statement($sql);
     }
-    public function learnQueryBuider()
-    {
+    public function learnQueryBuilder(){
         DB::enableQueryLog();
-        //Lấy tất cả bản ghi của table
-        // $lists = DB::table($this->table)->get(); // list này là một mảng
-        $id = 5;
-        // $lists = DB::table($this->table)
-        //     ->select('email', 'name as hoten', 'id', 'created_at')
-        //gom nhóm
-        // ->where('id', 2)
+        //lấy tất cả bảng ghi của table
+        // $id=20;
+        // $lists=DB::table($this->table)
+        // ->select('fullname as hoten','email','id','update_at','create_at')
+        // ->where('id',18)
         // ->where(function($query) use ($id){
-        //     $query->where('id', '<', $id)->orWhere('id', '>', $id);
+        //     $query->where('id','<',$id)->orWhere('id','>',$id);
+
         // })
-        // ->where('name', 'like', '%Nguyễn Văn A%')
-        // ->whereBetween('id', [3,5])
-        // ->whereNotBetween('id', [3,5])
-        // ->whereIn('id', [4, 5])
-        // ->whereNotIn('id', [4, 5])
-        // ->whereNull('update')
-        // ->whereNotNull('updated_at')
-        // ->whereDate('updated_at', '2024-03-20')
-        // ->whereMonth('created_at', '03 ')
-        // ->whereMonth('created_at', '11')
-        // ->whereYear('created_at', '2024 ')
-        // ->whereColumn('created_at','>' ,'update_at')
+        //->where('fullname','like','%van quan%')
+        // ->whereBetween('id', [18,20])
+        // ->whereNotBetween('id', [18,20])
+        // ->whereIn('id', [18,20])
+        // ->whereNotIn('id', [18,20])
+        // ->whereNull('update_at')
+        //->whereNotNull('update_at')
+        //->whereYear('create_at','2021')
+        // ->whereColumn('create_at','<>QQ','update_at')
+        // ->get();
+        //->toSql();
+        //join bảng
+       //$lists= DB::table('users');
+       //->select('users.*','groups.name as group_name')
+       //->rightJoin('groups','users.group_id','=','groups.id')
+        // ->orderBy('create_at','asc')
+        // ->orderBy('id','desc')
+        //->inRandomOrder()
+    //    ->select(DB::raw('count(id) as email_count'),'email','fullname')
+    //     ->groupBy('email')
+    //     ->groupBy('fullname')
+        //->having('email_count','>=',2)
+    //    ->limit(2)
+    //    ->offset(2)
+    // ->take(2)
+    // ->skip(2)
+    //    ->get();
 
-        // Phần join bảng
-        $lists = DB::table('users')
-            ->select('users.*', 'groups.name as group_name')
-            ->join('groups', 'users.group_id', '=', 'groups.id')
-            // ->leftJoin('groups', 'users.group_id', '=', 'groups.id')
-            // ->rightJoin('groups', 'users.group_id', '=', 'groups.id')
-            ->get();
-        // $sql = DB::getQueryLog();
-        // dd($sql);
+        //dd($lists);
+        // $status = DB::table('users')->insert(
+        //     [
+        //         'fullname'=>'Nguyễn Văn A',
+        //         'email'=>'nguyenvana@gmail.com',
+        //         'group-id'=>1,
+        //         'create_at'=> date('Y-m-d H:i:s')
+        //     ]
+        // );
+        //dd($status);
+        //$lastId= DB::getPdo()->lastInsertId();
+            // $lastId = DB::table('users')->insertGetId([
+            //     'fullname'=>'Nguyễn Văn A',
+            //     'email'=>'nguyenvana@gmail.com',
+            //     'group-id'=>1,
+            //     'create_at'=> date('Y-m-d H:i:s')
+            // ]);
+            // dd($lastId);
+        // $status = DB::table('users')
+        // ->where('id', 29)
+        // ->update([
+        //     'fullname'=>'Huỳnh Thị Tố Loan',
+        //     'email'=>'loan.huynh25@student.passerellesnumeriques.org',
+        //     'update_at' => date('Y-m-d H:i:s')
+        // ]);
 
-        dd($lists);
-        // echo $lists[0]->email;
-        // Lấy một bản ghi đầu tiên của table (Lấy thông tin chi tiết)
-        $detail = DB::table($this->table)->first();
-        // dd($detail->email);
-        dd($lists);
+        // $status = DB::table('users')
+        // ->where('id',28)
+        // ->delete();
+
+        //Đếm số bản ghi
+        //$count= DB::table('usets')->where('id','>',20)->count();
+
+        //list chạy sẽ là 2,65, còn có đầy đủ là 16,32
+        $list= DB::table('usets')->where('id','>',20)->get();
+        $count = count($list);
+        dd($count);
+
+        $sql=DB::getQueryLog();
+        dd($sql);
+        //Lấy 1 bản ghi đầu tiên của table
+       $detail=DB::table($this->table)->first();
     }
 }
